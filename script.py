@@ -1,9 +1,9 @@
 import csv
 from itertools import combinations
 
-def read_file(document):
+def read_file(file_csv):
     datas = []
-    with open(document) as file:
+    with open(file_csv) as file:
         reader = csv.DictReader(file, delimiter=",")
         for line in reader:
             value = (line["action"], line["price"], line["profit"])
