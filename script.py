@@ -1,12 +1,12 @@
 import csv
 from itertools import combinations
 
-def read_file(file):
+def read_file(document):
     datas = []
-    with open('data.csv') as file:
+    with open(document) as file:
         reader = csv.DictReader(file, delimiter=",")
         for line in reader:
-            value = (line["action"], line["price"], line["value"])
+            value = (line["action"], line["price"], line["profit"])
             datas.append(value)
 
     return datas
@@ -36,12 +36,12 @@ def calcul_investissement(combinaison):
     somme = 0
     gain = 0
     for combi in combinaison:
-        somme += int(combi[1])
+        somme += float(combi[1])
 
-        calcul = (int(combi[1]) * int(combi[2])) / 100
+        calcul = (float(combi[1]) * float(combi[2])) / 100
         gain += calcul
 
     return {"euros":somme, "pourcentage":gain}
 
-file = read_file('data.csv')
-get_combination(file)
+filename = read_file('datas.csv')
+get_combination(filename)
