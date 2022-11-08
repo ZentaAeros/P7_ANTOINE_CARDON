@@ -1,11 +1,12 @@
 import csv
 from itertools import combinations
-
+from tqdm import tqdm
+from time import strftime
 
 def read_file(file_csv):
     datas = []
     with open(file_csv) as file:
-        reader = csv.DictReader(file, delimiter=";")
+        reader = csv.DictReader(file, delimiter=",")
         for line in reader:
             value = (line["action"], line["price"], line["profit"])
             datas.append(value)
@@ -21,7 +22,7 @@ def display_actions(combinaison):
 
 def get_combination(file):
     gain = 0
-    for i in range(len(file)):
+    for i in tqdm(range(len(file))):
         combinaisons = combinations(file, i + 1)
 
         for combinaison in combinaisons:
@@ -47,6 +48,15 @@ def calcul_investissement(combinaison):
 
     return {"euros": somme, "pourcentage": gain}
 
-
+print()
+print(f"Recherche démarrée à {strftime('%H:%M:%S')}")
+print()
+start = int(strftime('%S'))
 filename = read_file("datas2.csv")
 get_combination(filename)
+end = int(strftime('%S'))
+delay = end - start
+print()
+print(f"Recherche terminée à {strftime('%H:%M:%S')}")
+print()
+print(f"Temps d'exécution : {delay} secondes")
