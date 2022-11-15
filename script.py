@@ -23,11 +23,13 @@ def get_best_combo(datas):
             price += action[1]
             win = action[1] * action[2] / 100
             profit += win
-    print(f"+ {profit} €")
+    print()
+    print(f"Total des gains : + {profit} €")
+    print()
 
 print(f"Recherche démarrée à {strftime('%H:%M:%S')}")
 start = int(strftime('%S'))
-actions = read_file('dataset2.csv')
+actions = read_file('test_actions2.csv')
 sorted_actions = sorted(actions, key=lambda action: action[2], reverse=True)
 get_best_combo(sorted_actions)
 end = int(strftime('%S'))
